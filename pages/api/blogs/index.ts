@@ -7,11 +7,17 @@ import { NextApiRequest, NextApiResponse } from "next";
 async function blogs(req: NextApiRequest, res: NextApiResponse) {
   const { method, query } = req;
 
-  console.info(`req.session.uniqueID`, req.session.uniqueID);
+  // console.info(`req.session.uniqueID`, req.session.uniqueID);
   try {
     if (method === "GET") {
       if (!req.session.uniqueID) {
-        res.status(500).json({ message: "session id not set" });
+        // res.status(500).json({ message: "session id not set" });
+
+        const uniqueID = generator.generate({
+          length: 64
+        });
+
+        req.session.uniqueID = uniqueID;
       }
 
       // // / add logic about end watch
