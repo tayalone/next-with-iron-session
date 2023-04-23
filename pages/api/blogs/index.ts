@@ -18,6 +18,8 @@ async function blogs(req: NextApiRequest, res: NextApiResponse) {
         });
 
         req.session.uniqueID = uniqueID;
+
+        await req.session.save();
       }
 
       // // / add logic about end watch
